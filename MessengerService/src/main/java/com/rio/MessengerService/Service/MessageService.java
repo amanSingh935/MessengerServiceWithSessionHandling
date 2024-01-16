@@ -1,7 +1,5 @@
 package com.rio.MessengerService.Service;
 
-import com.rio.MessengerService.Controller.UserController;
-import com.rio.MessengerService.Dto.MessageDto;
 import com.rio.MessengerService.Entity.Message;
 import com.rio.MessengerService.Repository.MessageRepository;
 import org.slf4j.Logger;
@@ -20,8 +18,8 @@ public class MessageService {
 
     public List<Message> fetchUnreadMessages(String username) {
         try {
-            return messageRepository.findAllUnreadMessagesForUser(username);
-        } catch (Exception e){
+            return messageRepository.findUnreadMessagesForUser(username);
+        } catch (Exception e) {
             logger.error("Unable to fetch messages for user due to: ", e);
             return Collections.emptyList();
         }
