@@ -18,7 +18,6 @@ public class UserService {
     final static Logger logger = LoggerFactory.getLogger(UserController.class);
     @Autowired
     private UserRepository userRepository;
-    @Autowired
     private PasswordEncoder passwordEncoder;
 
     public void createUser(@NonNull UserDto userDto){
@@ -35,6 +34,6 @@ public class UserService {
     }
 
     public Optional<User> checkUserExists(String username){
-        return userRepository.findByUserName(username);
+        return userRepository.findByUsername(username);
     }
 }
