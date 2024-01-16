@@ -6,8 +6,6 @@ import lombok.NonNull;
 
 @Data
 public class UserCreationRequest {
-    @NonNull
-    String username;
-    @NonNull
-    String password;
+    private String username;
+    private String password;
 }

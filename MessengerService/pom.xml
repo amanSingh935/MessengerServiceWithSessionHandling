@@ -19,9 +19,14 @@
 	</properties>
 	<dependencies>
 		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-security</artifactId>
+			<groupId>org.modelmapper</groupId>
+			<artifactId>modelmapper</artifactId>
+			<version>0.7.4</version>
 		</dependency>
+<!--		<dependency>-->
+<!--			<groupId>org.springframework.boot</groupId>-->
+<!--			<artifactId>spring-boot-starter-security</artifactId>-->
+<!--		</dependency>-->
 		<dependency>
 			  <groupId>mysql</groupId>
 			  <artifactId>mysql-connector-java</artifactId>
@@ -66,7 +71,7 @@
 				</configuration>
 			</plugin>
 		</plugins>
-		<finalName>spring_rest_docker</finalName>
+		<finalName>messenger-service</finalName>
 	</build>
 
 </project>

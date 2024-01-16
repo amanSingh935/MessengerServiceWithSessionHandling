@@ -3,4 +3,4 @@ COPY src /home/app/src
 COPY pom.xml /home/app
 RUN mvn -f /home/app/pom.xml clean package
 EXPOSE 8080
-ENTRYPOINT ["java","-jar","/home/app/target/spring_rest_docker.jar"]
+ENTRYPOINT ["java","-jar","/home/app/target/messenger-service.jar"]

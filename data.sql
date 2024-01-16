@@ -1,0 +1,2 @@
+--INSERT  INTO users(username, passwd, email) VALUES('amanSingh935', 'samplePasswd', 'singh.amansingh935@gmail.com');
+--INSERT  INTO persons(name) VALUES('Iroshan');

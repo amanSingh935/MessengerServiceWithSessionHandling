@@ -1,5 +1,6 @@
-CREATE TABLE IF NOT EXISTS persons(
-    `id` bigint(20) NOT NULL AUTO_INCREMENT,
-    `name` varchar(255) DEFAULT NULL,
-    PRIMARY KEY (`id`)
+CREATE TABLE IF NOT EXISTS users(
+    `username` varchar(255),
+    `passwd` varchar(255),
+    `email` varchar(300) DEFAULT NULL,
+    PRIMARY KEY (`username`)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
