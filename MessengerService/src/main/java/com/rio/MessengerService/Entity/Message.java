@@ -20,7 +20,7 @@ public class Message {
     private String userFrom;
     private String userTo;
     private String data;
-    private Boolean isRead;
+    private Boolean isRead = false;
 
     @CreationTimestamp
     private LocalDateTime createdTime;
@@ -33,7 +33,7 @@ public class Message {
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         return "Message From: " + userFrom + " to: " + userTo + " " + data + " at " + createdTime;
     }
 }

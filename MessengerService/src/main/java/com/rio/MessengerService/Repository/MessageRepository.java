@@ -7,7 +7,6 @@ import org.springframework.data.jpa.repository.Query;
 import java.util.List;
 
 public interface MessageRepository extends JpaRepository<Message, String> {
-    @Query(value = "SELECT * FROM messages", nativeQuery = true)
-//    WHERE (m.userFrom =?1 and m.status = 0) or (m.userTo =?1)  order by m.createdTime DESC
+    @Query(value = "SELECT * FROM messages as m WHERE (m.user_to =?1 AND m.is_read = 0) OR (m.user_from =?1)  ORDER BY m.created_time DESC", nativeQuery = true)
     List<Message> findUnreadMessagesForUser(String username);
 }
