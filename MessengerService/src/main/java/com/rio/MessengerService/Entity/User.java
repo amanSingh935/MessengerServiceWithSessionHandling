@@ -23,4 +23,5 @@ public class User {
     private String email;
     private String roles;
     private String name;
+    private String token;
 }

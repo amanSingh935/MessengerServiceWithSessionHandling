@@ -1,5 +1,7 @@
 package com.rio.MessengerService.Filter;
 
+import com.rio.MessengerService.Entity.User;
+import com.rio.MessengerService.Repository.UserRepository;
 import com.rio.MessengerService.Service.CustomUserDetailsService;
 import com.rio.MessengerService.Service.JwtService;
 import jakarta.servlet.FilterChain;
@@ -18,14 +20,14 @@ import java.io.IOException;
 
 @Component
 public class JwtAuthFilter extends OncePerRequestFilter {
-    @Autowired
-    private JwtService jwtService;
-
-    @Autowired
-    private CustomUserDetailsService userDetailsService;
+    @Autowired private JwtService jwtService;
+    @Autowired private CustomUserDetailsService userDetailsService;
+    @Autowired private UserRepository userRepository;
 
     @Override
-    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
+    protected void doFilterInternal(HttpServletRequest request,
+                                    HttpServletResponse response,
+                                    FilterChain filterChain) throws ServletException, IOException {
         String authHeader = request.getHeader("Authorization");
         String token = null;
         String username = null;
@@ -36,7 +38,8 @@ public class JwtAuthFilter extends OncePerRequestFilter {
 
         if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
             UserDetails userDetails = userDetailsService.loadUserByUsername(username);
-            if (jwtService.validateToken(token, userDetails)) {
+            User user = userRepository.findByUsername(username).get();   // Check token matches saved token for logout
+            if (jwtService.validateToken(token, userDetails) && user.getToken().equals(token)) {
                 UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
                 authToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
                 SecurityContextHolder.getContext().setAuthentication(authToken);

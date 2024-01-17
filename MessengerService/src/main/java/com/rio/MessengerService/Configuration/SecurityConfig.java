@@ -32,9 +32,9 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.csrf().disable()
                 .authorizeHttpRequests()
-                .requestMatchers("/login/user", "/users/create", "/users/all").permitAll()
+                .requestMatchers("/login", "/users/create", "/users/all").permitAll()
                 .and()
-                .authorizeHttpRequests().requestMatchers("/user/{}/message").authenticated()
+                .authorizeHttpRequests().requestMatchers("/user/{}/message", "/logout/**").authenticated()
                 .and()
                 .sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
