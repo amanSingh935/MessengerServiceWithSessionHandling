@@ -21,5 +21,6 @@ public class User {
     @Column(nullable = false)
     private String passwd;
     private String email;
+    private String roles;
     private String name;
 }

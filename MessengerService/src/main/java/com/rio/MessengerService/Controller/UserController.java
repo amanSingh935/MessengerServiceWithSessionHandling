@@ -1,6 +1,8 @@
 package com.rio.MessengerService.Controller;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.rio.MessengerService.Dto.UserDto;
+import com.rio.MessengerService.Repository.UserRepository;
 import com.rio.MessengerService.Request.UserCreationRequest;
 import com.rio.MessengerService.Service.UserService;
 import org.slf4j.Logger;
@@ -13,6 +15,8 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/users")
 public class UserController {
     @Autowired UserService userService;
+    @Autowired UserRepository userRepository;
+    private ObjectMapper mapper = new ObjectMapper();
     final static Logger logger = LoggerFactory.getLogger(UserController.class);
 
     @PostMapping("/create")
@@ -34,8 +38,9 @@ public class UserController {
 
     @GetMapping("/all")
     public ResponseEntity<String> listAllUsers(){
+        logger.error("Listing all users.");
         try{
-            return ResponseEntity.ok(userService.listAllUsers().toString());
+            return ResponseEntity.ok(mapper.writeValueAsString(userRepository.findAll()));
         } catch (Exception e){
             logger.error("Could not fetch all usernames.");
             return ResponseEntity.status(500).body("Internal error : " + e);
